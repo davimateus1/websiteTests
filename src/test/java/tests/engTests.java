@@ -9,8 +9,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.concurrent.TimeUnit;
 
 public class engTests {
+
     @Test
-    public void testSignInUOL(){
+    public void testContactPage(){
         System.setProperty("webdriver.chrome.driver", "B:\\webDriver\\chromedriver.exe");
         WebDriver navigator = new ChromeDriver();
         navigator.get("https://davimateusga.vercel.app/");
@@ -24,7 +25,34 @@ public class engTests {
         String result = navigator.findElement(By.tagName("p")).getText();
 
         assertEquals("Se gostou do meu trabalho e está interessado em algum projeto ou tem alguma dúvida, me manda uma mensagem!", result);
-
         navigator.quit();
+    }
+
+    @Test
+    public void testProjectsPage(){
+        System.setProperty("webdriver.chrome.driver", "B:\\webDriver\\chromedriver.exe");
+        WebDriver navigator = new ChromeDriver();
+        navigator.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        navigator.get("https://davimateusga.vercel.app/");
+
+        navigator.findElement(By.linkText("Projetos")).click();
+        navigator.findElement(By.linkText("Alurakut")).click();
+
+        String isGithub = navigator.findElement(By.linkText("Alurakut")).getText();
+        assertEquals("Alurakut", isGithub);
+    }
+
+    @Test
+    public void testDownloadCV(){
+        System.setProperty("webdriver.chrome.driver", "B:\\webDriver\\chromedriver.exe");
+        WebDriver navigator = new ChromeDriver();
+        navigator.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        navigator.get("https://davimateusga.vercel.app/");
+
+        navigator.findElement(By.className("HomePage_button2__AetJa")).click();
+        navigator.findElement(By.linkText("PT-BR")).click();
+
+        String isDownload = navigator.getCurrentUrl();
+        assertEquals("https://davimateusga.vercel.app/", isDownload);
     }
 }
